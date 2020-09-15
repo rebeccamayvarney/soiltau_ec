@@ -6,6 +6,9 @@ Created on Thu Feb  6 13:46:43 2020
 @author: Rebecca Varney, University of Exeter (rmv203@exeter.ac.uk)
 
 Script produces Figure 1 in Varney et al. 2020 Nature Communications
+(a) map plot of observational soil carbon (Cs)
+(b) map plot of observational heterotrophic respiration (Rh)
+(c) map plot of inferred soil carbon turnover time (tau=Cs/Rh)
 """
 
 #%%
@@ -136,7 +139,7 @@ historical_observational_rh = rh_data_regridded.copy()
 
 #%% tau calculation
 
-tau_s = merged_hwsd_ncscd_masked / rh_data_regridded #npp_data_new
+tau_s = merged_hwsd_ncscd_masked / rh_data_regridded
 tau_s_masked = ma.masked_where(np.logical_or(tau_s < 1, tau_s > 1e4), tau_s)
 obs_temp = ma.masked_where(np.logical_or(tau_s < 1, tau_s > 1e4), obs_temp)
 

@@ -7,8 +7,9 @@ Created on Thu Feb  6 13:46:43 2020
 
 Script produces Figure 4 in Varney et al. 2020 Nature Communications
 (a) Emergent Constraint Plot
+- x-axis: estimated deltaCs,tau / observational constraint, y axis: model deltaCs,tau / emergent constraint
 (b) Probability Density Function of Emergent Constraint
-(c) Emergent Constrained values of global mean deltaCs,tau against global mean temperature change
+(c) Emergent Constrained values of global mean deltaCs,tau against global mean temperature change (delta T)
 """
 
 #%%
@@ -123,8 +124,10 @@ for rcp_option in range(0, rcp_options_length):
 
     # for loop for each cmip6 model
     for model_i in range(0, n_models):
+
         if model_i > 6:
-            model_cmip5 = cmip5_models[model_i] # seleting the models       
+            # seleting the models
+            model_cmip5 = cmip5_models[model_i]       
             print(rcp, model_cmip5)
                 
             cmip5_modelshape = model_i+7
@@ -138,8 +141,9 @@ for rcp_option in range(0, rcp_options_length):
 
 
         else:
-            model_cmip6 = cmip6_models[model_i] # seleting the models
-            model_cmip5 = cmip5_models[model_i] # seleting the models
+            # seleting the models
+            model_cmip6 = cmip6_models[model_i]
+            model_cmip5 = cmip5_models[model_i]
             print(ssp, model_cmip6)
             ssp_option = rcp_option
 
@@ -200,7 +204,6 @@ plt.plot(xfit, yfit, color='k', linewidth=3)
 one_to_one_line = np.linspace(-xmin_limit, xmax_limit, 100)
 plt.plot(one_to_one_line, one_to_one_line, 'darkgrey', linewidth=0.5)
 
-#%% 
 
 #  legend
 handels_2 = []
@@ -276,7 +279,7 @@ mfity=2000
 dy=(maxy-miny)/mfity
 y2=miny+dy*np.arange(0,mfity)
 
-# Calculate 'prior'
+# Calculate prior
 Py_pr=y2
 Py_pr=1/np.sqrt(2*Pi*std_pr**2)*np.exp(-((y2-mn_pr)/(np.sqrt(2)*std_pr))**2)
 
@@ -421,6 +424,7 @@ sorted_temp_options = np.sort(new_temperature_change_options)
 plt.plot(sorted_temp_options, best_trend_equation(sorted_temp_options), 'b-', linewidth=5)
 # uncertainty bounds
 plt.fill_between(new_temperature_change_options, lower_ec_limit_array, upper_ec_limit_array, color='lightblue', label='Confidence Limits', alpha=0.4, zorder=20)
+
 
 ax.legend(fontsize=34)
 ax.set_xlim((0, 3))

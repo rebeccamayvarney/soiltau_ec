@@ -5,7 +5,8 @@
 Created on Thu Feb  6 13:46:43 2020
 @author: Rebecca Varney, University of Exeter (rmv203@exeter.ac.uk)
 
-Script that calculates and plots a timeseries of total soil carbon change (delta cSoil)
+Script produces Supplementary Figure 1 in Varney et al. 2020 Nature Communications
+- calculates and plots a timeseries of total soil carbon change (delta cSoil)
 against temperature change (delta T) for a selection of CMIP5 and CMIP6 models,
 for different RCP / SSP future scenarios.
 """

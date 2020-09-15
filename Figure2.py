@@ -6,6 +6,8 @@ Created on Thu Feb  6 13:46:43 2020
 @author: Rebecca Varney, University of Exeter (rmv203@exeter.ac.uk)
 
 Script produces Figure 2 in Varney et al. 2020 Nature Communications
+(a) deltaCs,tau against delta T
+(b) deltaCs,tau/Cs,0 against delta T
 """
 
 #%%
@@ -673,5 +675,5 @@ plt.text(-0.14, 0.9999, 'b',transform=ax.transAxes,va = 'top',fontweight = 'bold
 
 
 #%%
-fig_figure2.savefig('paper_figures/Figure2.pdf', bbox_inches='tight')
+fig_figure2.savefig('paper_figures/Figure2_v1.pdf', bbox_inches='tight')
 plt.close()
