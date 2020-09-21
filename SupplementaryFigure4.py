@@ -25,8 +25,8 @@ import warnings
 from iris.experimental.equalise_cubes import equalise_attributes
 
 # My functions
-from rmv_cmip_analysis import time_average
-from rmv_cmip_analysis import regrid_model
+from rmv_analysis_functions import time_average
+from rmv_analysis_functions import regrid_model
 
 # Plotting
 import matplotlib as mpl

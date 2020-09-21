@@ -23,14 +23,14 @@ import numpy as np
 import numpy.ma as ma
 
 # My functions
-from rmv_cmip_analysis import combine_netCDF_time_overlap
-from rmv_cmip_analysis import combine_netCDF_rh_cmip6
-from rmv_cmip_analysis import combine_netCDF
-from rmv_cmip_analysis import open_netCDF
-from rmv_cmip_analysis import select_time
-from rmv_cmip_analysis import time_average
-from rmv_cmip_analysis import numpy_to_cube
-from rmv_cmip_analysis import global_total_percentage
+from rmv_analysis_functions import combine_netCDF_time_overlap
+from rmv_analysis_functions import combine_netCDF_rh_cmip6
+from rmv_analysis_functions import combine_netCDF
+from rmv_analysis_functions import open_netCDF
+from rmv_analysis_functions import select_time
+from rmv_analysis_functions import time_average
+from rmv_analysis_functions import numpy_to_cube
+from rmv_analysis_functions import global_total_percentage
 
 
 #%%

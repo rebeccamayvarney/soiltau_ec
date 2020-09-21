@@ -23,13 +23,13 @@ import warnings
 from iris.experimental.equalise_cubes import equalise_attributes
 
 # My functions
-from rmv_cmip_analysis import combine_netCDF
-from rmv_cmip_analysis import combine_netCDF_time_overlap
-from rmv_cmip_analysis import open_netCDF
-from rmv_cmip_analysis import define_attributes
-from rmv_cmip_analysis import select_time
-from rmv_cmip_analysis import time_average
-from rmv_cmip_analysis import annual_average
+from rmv_analysis_functions import combine_netCDF
+from rmv_analysis_functions import combine_netCDF_time_overlap
+from rmv_analysis_functions import open_netCDF
+from rmv_analysis_functions import define_attributes
+from rmv_analysis_functions import select_time
+from rmv_analysis_functions import time_average
+from rmv_analysis_functions import annual_average
 
 # Plotting
 import matplotlib as mpl

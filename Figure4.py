@@ -27,14 +27,14 @@ import warnings
 from iris.experimental.equalise_cubes import equalise_attributes
 
 # My functions
-from rmv_cmip_analysis import combine_netCDF_observations
-from rmv_cmip_analysis import time_average
-from rmv_cmip_analysis import numpy_to_cube
-from rmv_cmip_analysis import regrid_model
-from rmv_cmip_analysis import global_total
-from rmv_cmip_analysis import lin_reg_UU
-from rmv_cmip_analysis import obtaining_Cs_q10
-from rmv_cmip_analysis import EC_pdf_UU_reduced
+from rmv_analysis_functions import combine_netCDF_observations
+from rmv_analysis_functions import time_average
+from rmv_analysis_functions import numpy_to_cube
+from rmv_analysis_functions import regrid_model
+from rmv_analysis_functions import global_total
+from rmv_analysis_functions import lin_reg_UU
+from rmv_analysis_functions import obtaining_Cs_q10
+from rmv_analysis_functions import EC_pdf_UU_reduced
 
 # Plotting
 import matplotlib as mpl
