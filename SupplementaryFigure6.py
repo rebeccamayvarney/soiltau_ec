@@ -26,18 +26,18 @@ import warnings
 from iris.experimental.equalise_cubes import equalise_attributes
 
 # My functions
-from rmv_analysis_functions import combine_netCDF_time_overlap
-from rmv_analysis_functions import combine_netCDF_observations
-from rmv_analysis_functions import combine_netCDF_observations_temp
-from rmv_analysis_functions import open_netCDF
-from rmv_analysis_functions import select_time
-from rmv_analysis_functions import time_average
-from rmv_analysis_functions import annual_average
-from rmv_analysis_functions import numpy_to_cube
-from rmv_analysis_functions import regrid_model
-from rmv_analysis_functions import area_average
-from rmv_analysis_functions import global_total
-from rmv_analysis_functions import global_total_percentage
+from rmv_cmip_analysis import combine_netCDF_time_overlap
+from rmv_cmip_analysis import combine_netCDF_observations
+from rmv_cmip_analysis import combine_netCDF_observations_temp
+from rmv_cmip_analysis import open_netCDF
+from rmv_cmip_analysis import select_time
+from rmv_cmip_analysis import time_average
+from rmv_cmip_analysis import annual_average
+from rmv_cmip_analysis import numpy_to_cube
+from rmv_cmip_analysis import regrid_model
+from rmv_cmip_analysis import area_average
+from rmv_cmip_analysis import global_total
+from rmv_cmip_analysis import global_total_percentage
 
 # Plotting
 import matplotlib as mpl

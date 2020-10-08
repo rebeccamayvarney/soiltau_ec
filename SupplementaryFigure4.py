@@ -25,8 +25,8 @@ import warnings
 from iris.experimental.equalise_cubes import equalise_attributes
 
 # My functions
-from rmv_analysis_functions import time_average
-from rmv_analysis_functions import regrid_model
+from rmv_cmip_analysis import time_average
+from rmv_cmip_analysis import regrid_model
 
 # Plotting
 import matplotlib as mpl
@@ -87,7 +87,7 @@ card_rh = rh_data_regridded.copy()
 
 # MODIS Net Primary Production (NPP)
 npp_file = Dataset('/home/links/rmv203/obs_datasets/MOD17A3_Science_NPP_mean_00_14_regridhalfdegree.nc')
-npp_data = npp_file.variables['npp'][:]*1e-3
+npp_data_new = npp_file.variables['npp'][:]*1e-3
 #npp_data_new = np.ma.masked_where(rh_data_regridded==0, npp_data)
 #npp_data_new = np.ma.masked_where(npp_data_new<=0, npp_data_new)
 

@@ -26,8 +26,8 @@ import warnings
 from iris.experimental.equalise_cubes import equalise_attributes
 
 # My functions
-from rmv_analysis_functions import time_average
-from rmv_analysis_functions import regrid_model
+from rmv_cmip_analysis import time_average
+from rmv_cmip_analysis import regrid_model
 
 # Plotting
 import matplotlib as mpl
@@ -129,7 +129,7 @@ rh_data_hashimoto = np.squeeze(rh_data_hashimoto)
 rh_data_hashimoto = rh_data_hashimoto*1e-3
 rh_data_hashimoto = np.ma.masked_array(rh_data_hashimoto, mask= rh_data_hashimoto<0.1)
 rh_data_hashimoto = np.ma.masked_array(rh_data_hashimoto, mask= rh_data_hashimoto>1e2)
-tau_hashimotoimoto = merged_hwsd_ncscd_masked / rh_data_hashimoto
+tau_hashimoto = merged_hwsd_ncscd_masked / rh_data_hashimoto
 tau_hashimoto_masked = ma.masked_where(np.logical_or(tau_hashimoto < 1, tau_hashimoto > 1e4), tau_hashimoto)
 tau_hashimoto_log = ma.log(tau_hashimoto_masked)
 

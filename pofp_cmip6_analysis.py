@@ -23,14 +23,14 @@ import numpy as np
 import numpy.ma as ma
 
 # My functions
-from rmv_analysis_functions import combine_netCDF_time_overlap
-from rmv_analysis_functions import combine_netCDF_rh_cmip6
-from rmv_analysis_functions import combine_netCDF
-from rmv_analysis_functions import open_netCDF
-from rmv_analysis_functions import select_time
-from rmv_analysis_functions import time_average
-from rmv_analysis_functions import numpy_to_cube
-from rmv_analysis_functions import global_total_percentage
+from rmv_cmip_analysis import combine_netCDF_model
+from rmv_cmip_analysis import combine_netCDF_cmip6
+from rmv_cmip_analysis import combine_netCDF_rh_cmip6
+from rmv_cmip_analysis import open_netCDF
+from rmv_cmip_analysis import select_time
+from rmv_cmip_analysis import time_average
+from rmv_cmip_analysis import numpy_to_cube
+from rmv_cmip_analysis import global_total_percentage
 
 
 #%%
@@ -77,10 +77,10 @@ for ssp_option in range(0, ssp_options_length):
         rh_historical_cube = combine_netCDF_rh_cmip6('/home/rmv203/cmip6_data/rh_Lmon_'+model+'_historical*', model)
         rh_historical_cube = open_netCDF(rh_historical_cube)
         # Soil Carbon (cSoil)
-        cSoil_historical_cube = combine_netCDF_time_overlap('/home/rmv203/cmip6_data/cSoil_Emon_'+model+'_historical*', model)
+        cSoil_historical_cube = combine_netCDF_cmip6('/home/rmv203/cmip6_data/cSoil_Emon_'+model+'_historical*', model)
         cSoil_historical_cube = open_netCDF(cSoil_historical_cube)
         # Near Surface Air Temperature (tas)
-        tas_historical_cube = combine_netCDF_time_overlap('/home/rmv203/cmip6_data/tas_Amon_'+model+'_historical*', model)
+        tas_historical_cube = combine_netCDF_cmip6('/home/rmv203/cmip6_data/tas_Amon_'+model+'_historical*', model)
         tas_historical_cube = open_netCDF(tas_historical_cube)
 
         # Select historical time period
@@ -130,7 +130,7 @@ for ssp_option in range(0, ssp_options_length):
         tau_s_historical_estimated = poly_relationship(historical_tas_save_data)
 
         # future
-        tas_future_cube = combine_netCDF_time_overlap('/home/links/rmv203/cmip6_data/tas_Amon_'+model+'_'+ssp+'_*', model)
+        tas_future_cube = combine_netCDF_cmip6('/home/links/rmv203/cmip6_data/tas_Amon_'+model+'_'+ssp+'_*', model)
         tas_future_cube = open_netCDF(tas_future_cube)
         # select time
         tas_future_cube = select_time(tas_future_cube, lower, upper)
@@ -160,7 +160,7 @@ for ssp_option in range(0, ssp_options_length):
         rh_future_cube = combine_netCDF_rh_cmip6('/home/rmv203/cmip6_data/rh_Lmon_'+model+'_'+ssp+'*', model)
         rh_future_cube = open_netCDF(rh_future_cube)
         # Soil Carbon (cSoil)
-        cSoil_future_cube = combine_netCDF_time_overlap('/home/rmv203/cmip6_data/cSoil_Emon_'+model+'_'+ssp+'*', model)
+        cSoil_future_cube = combine_netCDF_cmip6('/home/rmv203/cmip6_data/cSoil_Emon_'+model+'_'+ssp+'*', model)
         cSoil_future_cube = open_netCDF(cSoil_future_cube)
         # Select future time period
         rh_future_cube = select_time(rh_future_cube, lower, upper)
@@ -193,7 +193,7 @@ for ssp_option in range(0, ssp_options_length):
         delta_c_soil_model_cube = numpy_to_cube(delta_c_soil_model, cSoil_historical_save_cube, 2)
         delta_c_soil_estimated_cube = numpy_to_cube(delta_c_soil_estimated, cSoil_historical_save_cube, 2)
         # landfrac
-        landfraction = combine_netCDF('/home/rmv203/cmip6_data/sftlf_fx_'+model+'_historical*', model)
+        landfraction = combine_netCDF_model('/home/rmv203/cmip6_data/sftlf_fx_'+model+'_historical*', model)
         # Global totals
         model_delta_cSoil_global = global_total_percentage(delta_c_soil_model_cube, landfrac=landfraction, latlon_cons=None)
         model_delta_cSoil_global_data = model_delta_cSoil_global.data

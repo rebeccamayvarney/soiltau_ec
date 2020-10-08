@@ -913,4 +913,4 @@ def EC_pdf_UU_reduced(x, y, x_obs, dx_obs):
     lower_ec_limit = y_lo_1sd.copy()
     upper_ec_limit = y_hi_1sd.copy()
 
-    return mean_ec_y_value, lower_ec_limit, upper_ec_limit, xfit, yfit
+    return mean_ec_y_value, lower_ec_limit, upper_ec_limit

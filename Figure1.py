@@ -26,9 +26,9 @@ import warnings
 from iris.experimental.equalise_cubes import equalise_attributes
 
 # My functions
-from rmv_analysis_functions import regrid_model
-from rmv_analysis_functions import select_time
-from rmv_analysis_functions import time_average
+from rmv_cmip_analysis import regrid_model
+from rmv_cmip_analysis import select_time
+from rmv_cmip_analysis import time_average
 
 # Plotting
 import matplotlib as mpl
@@ -165,12 +165,11 @@ x, y = np.meshgrid(lon, lat)
 
 #print(np.min(obs_Cs), np.max(obs_Cs))
 line = np.arange(0, 80, 10)
-diff = plt.contourf(x, y, obs_Cs, line, cmap = 'RdBu_r', extend='both', transform=ccrs.PlateCarree(central_longitude=0))
+diff = plt.contourf(x, y, obs_Cs, line, cmap = 'RdBu_r', extend='max', transform=ccrs.PlateCarree(central_longitude=0))
+ax.text(-0.12, 1.07, 'a',transform=ax.transAxes,va = 'top',fontweight = 'bold',fontsize=34)
 ax=fig_figure1.add_subplot(gs[0,1])
 ax=plt.gca()
 fig_figure1.colorbar(diff, ax, orientation='vertical').set_label(r'$C_\mathrm{s}$ (kg C m$^{-2}$)')
-
-ax.text(-0.15, 1.07, 'a',transform=ax.transAxes,va = 'top',fontweight = 'bold',fontsize=34)
 
 
 #%%
@@ -195,12 +194,11 @@ x, y = np.meshgrid(lon, lat)
 
 #print(np.min(historical_observational_rh), np.max(historical_observational_rh))
 line = np.arange(0, 1.5, 0.1)
-diff = plt.contourf(x, y, historical_observational_rh, line, cmap = 'RdBu_r', extend='both', transform=ccrs.PlateCarree(central_longitude=0))
+diff = plt.contourf(x, y, historical_observational_rh, line, cmap = 'RdBu_r', extend='max', transform=ccrs.PlateCarree(central_longitude=0))
+ax.text(-0.12, 1.07, 'b',transform=ax.transAxes,va = 'top',fontweight = 'bold', fontsize=34)
 ax=fig_figure1.add_subplot(gs[1,1])
 ax=plt.gca()
 fig_figure1.colorbar(diff, ax, orientation='vertical').set_label(r'$R_\mathrm{h}$ (kg C m$^{-2}$ yr$^{-1}$)')
-
-ax.text(-0.15, 1.07, 'b',transform=ax.transAxes,va = 'top',fontweight = 'bold', fontsize=34)
 
 
 #%%
@@ -227,13 +225,13 @@ inferred_tau = ma.log(tau_s_masked)
 #print(np.min(inferred_tau), np.max(inferred_tau))
 line = np.arange(1, 7, 0.5)
 diff = ax.contourf(x, y, inferred_tau, line, cmap = 'RdBu_r', extend='both', transform=ccrs.PlateCarree(central_longitude=0))
+ax.text(-0.12, 1.07, 'c',transform=ax.transAxes,va = 'top',fontweight = 'bold', fontsize=34)
+
 ax=fig_figure1.add_subplot(gs[2,1])
 ax=plt.gca()
 fig_figure1.colorbar(diff, ax, orientation='vertical').set_label(r'Inferred $\tau_\mathrm{s}$ (yr)')
 # setting non linear (non log) colourbar labels
 ax.set_yticklabels(['3', '7', '20', '55', '150', '400'])
-
-ax.text(-0.15, 1.07, 'c',transform=ax.transAxes,va = 'top',fontweight = 'bold', fontsize=34)
 
 
 #%%

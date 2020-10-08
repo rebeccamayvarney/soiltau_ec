@@ -25,22 +25,19 @@ import warnings
 from iris.experimental.equalise_cubes import equalise_attributes
 
 # My functions
-from rmv_analysis_functions import combine_netCDF_cmip5
-from rmv_analysis_functions import combine_netCDF_observations
-from rmv_analysis_functions import combine_netCDF_time_overlap
-from rmv_analysis_functions import combine_netCDF
-from rmv_analysis_functions import combine_netCDF_merging_time_runs
-from rmv_analysis_functions import open_netCDF
-from rmv_analysis_functions import select_time
-from rmv_analysis_functions import time_average
-from rmv_analysis_functions import annual_average
-from rmv_analysis_functions import decadal_average
-from rmv_analysis_functions import numpy_to_cube
-from rmv_analysis_functions import regrid_model
-from rmv_analysis_functions import area_average
-from rmv_analysis_functions import global_total
-from rmv_analysis_functions import global_total_percentage
-from rmv_analysis_functions import obtaining_fractional_deltaCs_q10
+from rmv_cmip_analysis import combine_netCDF_model
+from rmv_cmip_analysis import combine_netCDF_cmip5
+from rmv_cmip_analysis import combine_netCDF_cmip6
+from rmv_cmip_analysis import open_netCDF
+from rmv_cmip_analysis import select_time
+from rmv_cmip_analysis import time_average
+from rmv_cmip_analysis import annual_average
+from rmv_cmip_analysis import numpy_to_cube
+from rmv_cmip_analysis import regrid_model
+from rmv_cmip_analysis import area_average
+from rmv_cmip_analysis import global_total
+from rmv_cmip_analysis import global_total_percentage
+from rmv_cmip_analysis import obtaining_fractional_deltaCs_q10
 
 # Plotting
 import matplotlib as mpl
@@ -243,13 +240,13 @@ for ssp_option in range(0, ssp_options_length):
         #%% modelled historical
 
         # Heterotrophic Respiration (RH)
-        rh_historical_cube_new = combine_netCDF_time_overlap('/home/rmv203/cmip6_data/rh_Lmon_'+model+'_historical*', model)
+        rh_historical_cube_new = combine_netCDF_cmip6('/home/rmv203/cmip6_data/rh_Lmon_'+model+'_historical*', model)
         rh_historical_cube_new = open_netCDF(rh_historical_cube_new)
         # Soil Carbon (cSoil)
-        cSoil_historical_cube_new = combine_netCDF_time_overlap('/home/rmv203/cmip6_data/cSoil_Emon_'+model+'_historical*', model)
+        cSoil_historical_cube_new = combine_netCDF_cmip6('/home/rmv203/cmip6_data/cSoil_Emon_'+model+'_historical*', model)
         cSoil_historical_cube_new = open_netCDF(cSoil_historical_cube_new)
         # Near Surface Air Temperature (tas)
-        tas_historical_cube = combine_netCDF_time_overlap('/home/rmv203/cmip6_data/tas_Amon_'+model+'_historical*', model)
+        tas_historical_cube = combine_netCDF_cmip6('/home/rmv203/cmip6_data/tas_Amon_'+model+'_historical*', model)
         tas_historical_cube = open_netCDF(tas_historical_cube)
 
         # Select historical time period
@@ -277,13 +274,13 @@ for ssp_option in range(0, ssp_options_length):
         #%%  Modelled Future
 
         # Heterotrophic Respiration (RH)
-        rh_cube = combine_netCDF_time_overlap('/home/rmv203/cmip6_data/rh_Lmon_'+model+'_'+ssp+'_*', model)
+        rh_cube = combine_netCDF_cmip6('/home/rmv203/cmip6_data/rh_Lmon_'+model+'_'+ssp+'_*', model)
         rh_cube = open_netCDF(rh_cube)
         # Soil Carbon (cSoil)
-        cSoil_cube = combine_netCDF_time_overlap('/home/rmv203/cmip6_data/cSoil_Emon_'+model+'_'+ssp+'_*', model)
+        cSoil_cube = combine_netCDF_cmip6('/home/rmv203/cmip6_data/cSoil_Emon_'+model+'_'+ssp+'_*', model)
         cSoil_cube = open_netCDF(cSoil_cube)
         # Near Surface Air Temperature (tas)
-        tas_cube = combine_netCDF_time_overlap('/home/rmv203/cmip6_data/tas_Amon_'+model+'_'+ssp+'_*', model)
+        tas_cube = combine_netCDF_cmip6('/home/rmv203/cmip6_data/tas_Amon_'+model+'_'+ssp+'_*', model)
         tas_cube = open_netCDF(tas_cube)
         # Select future time period
         rh_cube = select_time(rh_cube, 2010, 2100)
@@ -318,7 +315,7 @@ for ssp_option in range(0, ssp_options_length):
         delta_c_soil_actual = np.ma.masked_invalid(delta_c_soil_actual) # Masking invalid values
         # convert numpy array to cube
         delta_c_soil_actual_cube = numpy_to_cube(delta_c_soil_actual, cube_save, 3)
-        landfraction = combine_netCDF('/home/rmv203/cmip6_data/sftlf_fx_'+model+'_historical*', model)
+        landfraction = combine_netCDF_model('/home/rmv203/cmip6_data/sftlf_fx_'+model+'_historical*', model)
         actual_delta_cSoil_global = global_total_percentage(delta_c_soil_actual_cube, landfrac=landfraction, latlon_cons=None)
         actual_delta_cSoil_global_data = actual_delta_cSoil_global.data
 
@@ -513,13 +510,13 @@ for ssp_option in range(0, ssp_options_length):
         #%% modelled historical
 
         # Heterotrophic Respiration (RH)
-        rh_historical_cube_new = combine_netCDF_time_overlap('/home/rmv203/cmip6_data/rh_Lmon_'+model+'_historical*', model)
+        rh_historical_cube_new = combine_netCDF_cmip6('/home/rmv203/cmip6_data/rh_Lmon_'+model+'_historical*', model)
         rh_historical_cube_new = open_netCDF(rh_historical_cube_new)
         # Soil Carbon (cSoil)
-        cSoil_historical_cube_new = combine_netCDF_time_overlap('/home/rmv203/cmip6_data/cSoil_Emon_'+model+'_historical*', model)
+        cSoil_historical_cube_new = combine_netCDF_cmip6('/home/rmv203/cmip6_data/cSoil_Emon_'+model+'_historical*', model)
         cSoil_historical_cube_new = open_netCDF(cSoil_historical_cube_new)
         # Near Surface Air Temperature (tas)
-        tas_historical_cube = combine_netCDF_time_overlap('/home/rmv203/cmip6_data/tas_Amon_'+model+'_historical*', model)
+        tas_historical_cube = combine_netCDF_cmip6('/home/rmv203/cmip6_data/tas_Amon_'+model+'_historical*', model)
         tas_historical_cube = open_netCDF(tas_historical_cube)
         # Select historical time period
         rh_historical_cube_new = select_time(rh_historical_cube_new, lower_historical, upper_historical)
@@ -545,13 +542,13 @@ for ssp_option in range(0, ssp_options_length):
         #%% Modelled Future
 
         # Heterotrophic Respiration (RH)
-        rh_cube = combine_netCDF_time_overlap('/home/rmv203/cmip6_data/rh_Lmon_'+model+'_'+ssp+'_*', model)
+        rh_cube = combine_netCDF_cmip6('/home/rmv203/cmip6_data/rh_Lmon_'+model+'_'+ssp+'_*', model)
         rh_cube = open_netCDF(rh_cube)
         # Soil Carbon (cSoil)
-        cSoil_cube = combine_netCDF_time_overlap('/home/rmv203/cmip6_data/cSoil_Emon_'+model+'_'+ssp+'_*', model)
+        cSoil_cube = combine_netCDF_cmip6('/home/rmv203/cmip6_data/cSoil_Emon_'+model+'_'+ssp+'_*', model)
         cSoil_cube = open_netCDF(cSoil_cube)
         # Near Surface Air Temperature (tas)
-        tas_cube = combine_netCDF_time_overlap('/home/rmv203/cmip6_data/tas_Amon_'+model+'_'+ssp+'_*', model)
+        tas_cube = combine_netCDF_cmip6('/home/rmv203/cmip6_data/tas_Amon_'+model+'_'+ssp+'_*', model)
         tas_cube = open_netCDF(tas_cube)
         # Select future time period
         rh_cube = select_time(rh_cube, 2010, 2100)
@@ -586,16 +583,16 @@ for ssp_option in range(0, ssp_options_length):
         delta_c_soil_actual = np.ma.masked_invalid(delta_c_soil_actual) # Masking invalid values
         # convert numpy array to cube
         delta_c_soil_actual_cube = numpy_to_cube(delta_c_soil_actual, cube_save, 3)
-        landfraction = combine_netCDF('/home/rmv203/cmip6_data/sftlf_fx_'+model+'_historical*', model)
+        landfraction = combine_netCDF_model('/home/rmv203/cmip6_data/sftlf_fx_'+model+'_historical*', model)
         actual_delta_cSoil_global = global_total_percentage(delta_c_soil_actual_cube, landfrac=landfraction, latlon_cons=None)
         actual_delta_cSoil_global_data = actual_delta_cSoil_global.data
 
         # Calculating global totals of hitorical Soil Carbon (cSoil)
-        cSoil_inital_cube = combine_netCDF_time_overlap('/home/rmv203/cmip6_data/cSoil_Emon_'+model+'_historical*', model)
+        cSoil_inital_cube = combine_netCDF_cmip6('/home/rmv203/cmip6_data/cSoil_Emon_'+model+'_historical*', model)
         cSoil_inital_cube = open_netCDF(cSoil_inital_cube)
         cSoil_inital_cube = select_time(cSoil_inital_cube, 1995, 2005)
         cSoil_inital_cube = time_average(cSoil_inital_cube)
-        landfraction = combine_netCDF('/home/rmv203/cmip6_data/sftlf_fx_'+model+'_historical*', model)
+        landfraction = combine_netCDF_model('/home/rmv203/cmip6_data/sftlf_fx_'+model+'_historical*', model)
         total_cSoil_inital_cube = global_total_percentage(cSoil_inital_cube, landfrac=landfraction, latlon_cons=None)
         total_cSoil_inital_data = total_cSoil_inital_cube.data
 

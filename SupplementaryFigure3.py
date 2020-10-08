@@ -23,13 +23,12 @@ import warnings
 from iris.experimental.equalise_cubes import equalise_attributes
 
 # My functions
-from rmv_analysis_functions import combine_netCDF
-from rmv_analysis_functions import combine_netCDF_time_overlap
-from rmv_analysis_functions import open_netCDF
-from rmv_analysis_functions import define_attributes
-from rmv_analysis_functions import select_time
-from rmv_analysis_functions import time_average
-from rmv_analysis_functions import annual_average
+from rmv_cmip_analysis import combine_netCDF_cmip5
+from rmv_cmip_analysis import open_netCDF
+from rmv_cmip_analysis import define_attributes
+from rmv_cmip_analysis import select_time
+from rmv_cmip_analysis import time_average
+from rmv_cmip_analysis import annual_average
 
 # Plotting
 import matplotlib as mpl
@@ -48,8 +47,10 @@ from matplotlib.lines import Line2D
 # set up of figure
 fig_cmip5 = plt.figure(1, figsize=(18,14))
 gs = gspec.GridSpec(3, 3, figure=fig_cmip5, hspace=0.2)
-column_1 = 0 # for figure 1
+n = 9
+column_1 = 0
 row_1 = 0
+n_columns_1 = 3
 mpl.rcParams['xtick.direction'] = 'out'
 mpl.rcParams['ytick.direction'] = 'out'
 mpl.rcParams['xtick.top'] = True

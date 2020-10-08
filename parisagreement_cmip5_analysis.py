@@ -21,8 +21,6 @@ for each model considered in this study
 # Analysis imports
 import numpy as np
 import numpy.ma as ma
-
-# Iris imports
 import iris
 import iris.coord_categorisation
 import glob
@@ -30,18 +28,17 @@ import warnings
 from iris.experimental.equalise_cubes import equalise_attributes
 
 # My functions
-from rmv_analysis_functions import combine_netCDF_cmip5
-from rmv_analysis_functions import combine_netCDF_merging_time_runs
-from rmv_analysis_functions import combine_netCDF_observations
-from rmv_analysis_functions import open_netCDF
-from rmv_analysis_functions import select_time
-from rmv_analysis_functions import time_average
-from rmv_analysis_functions import annual_average
-from rmv_analysis_functions import numpy_to_cube
-from rmv_analysis_functions import regrid_model
-from rmv_analysis_functions import area_average
-from rmv_analysis_functions import global_total
-from rmv_analysis_functions import global_total_percentage
+from rmv_cmip_analysis import combine_netCDF_variable
+from rmv_cmip_analysis import combine_netCDF_cmip5
+from rmv_cmip_analysis import open_netCDF
+from rmv_cmip_analysis import select_time
+from rmv_cmip_analysis import time_average
+from rmv_cmip_analysis import annual_average
+from rmv_cmip_analysis import numpy_to_cube
+from rmv_cmip_analysis import regrid_model
+from rmv_cmip_analysis import area_average
+from rmv_cmip_analysis import global_total
+from rmv_cmip_analysis import global_total_percentage
 
 
 #%%
@@ -58,7 +55,7 @@ observational_rh_mask = np.load('saved_variables/observational_rh_mask.npy')
 observational_rh = np.ma.masked_array(observational_rh_data, mask=observational_rh_mask)
 
 # loading observational land fraction
-landfraction_obs = combine_netCDF_observations('/home/links/rmv203/obs_datasets/luc4c_landmask.nc', 'mask')
+landfraction_obs = combine_netCDF_variable('/home/links/rmv203/obs_datasets/luc4c_landmask.nc', 'mask')
 
 
 #%%
@@ -132,7 +129,7 @@ for temp_option in range(0, temperature_change_options_length):
             tas_preindustrial_data = tas_preindustrial_cube.data
     
             # cube to find future temperature change
-            tas_cube = combine_netCDF_merging_time_runs('/home/rmv203/cmip5_historical_'+rcp+'/tas_Amon_'+model+'_*', 'air_temperature', model) #cmip5_data/tas_Amon_'+model+'_'+rcp+'*', 'air_temperature', model)
+            tas_cube = combine_netCDF_cmip5('/home/rmv203/cmip5_historical_'+rcp+'/tas_Amon_'+model+'_*', 'air_temperature', model)
             tas_cube = open_netCDF(tas_cube)
             tas_test_cube = annual_average(tas_cube)
             # defining the time variable for years
@@ -200,9 +197,9 @@ for temp_option in range(0, temperature_change_options_length):
             # model deltaCs,tau
 
             # finding future model tau for model
-            rh_cube = combine_netCDF_merging_time_runs('/home/rmv203/cmip5_historical_'+rcp+'/rh_Lmon_'+model+'_*', 'heterotrophic_respiration_carbon_flux', model)
+            rh_cube = combine_netCDF_cmip5('/home/rmv203/cmip5_historical_'+rcp+'/rh_Lmon_'+model+'_*', 'heterotrophic_respiration_carbon_flux', model)
             rh_cube = open_netCDF(rh_cube)
-            cSoil_cube = combine_netCDF_merging_time_runs('/home/rmv203/cmip5_historical_'+rcp+'/cSoil_Lmon_'+model+'_*', 'soil_carbon_content', model)
+            cSoil_cube = combine_netCDF_cmip5('/home/rmv203/cmip5_historical_'+rcp+'/cSoil_Lmon_'+model+'_*', 'soil_carbon_content', model)
             cSoil_cube = open_netCDF(cSoil_cube)
             # Select future time period
             rh_cube = select_time(rh_cube, temp_change_year-5, temp_change_year+5)

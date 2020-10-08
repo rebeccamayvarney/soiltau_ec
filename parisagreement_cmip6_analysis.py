@@ -28,20 +28,20 @@ import warnings
 from iris.experimental.equalise_cubes import equalise_attributes
 
 # My functions
-from rmv_analysis_functions import combine_netCDF
-from rmv_analysis_functions import combine_netCDF_time_overlap
-from rmv_analysis_functions import combine_netCDF_rh_cmip6
-from rmv_analysis_functions import combine_netCDF_cSoil_cmip6
-from rmv_analysis_functions import combine_netCDF_observations
-from rmv_analysis_functions import open_netCDF
-from rmv_analysis_functions import select_time
-from rmv_analysis_functions import time_average
-from rmv_analysis_functions import annual_average
-from rmv_analysis_functions import numpy_to_cube
-from rmv_analysis_functions import regrid_model
-from rmv_analysis_functions import area_average
-from rmv_analysis_functions import global_total
-from rmv_analysis_functions import global_total_percentage
+from rmv_cmip_analysis import combine_netCDF_model
+from rmv_cmip_analysis import combine_netCDF_variable
+from rmv_cmip_analysis import combine_netCDF_cmip6
+from rmv_cmip_analysis import combine_netCDF_rh_cmip6
+from rmv_cmip_analysis import combine_netCDF_cSoil_cmip6
+from rmv_cmip_analysis import open_netCDF
+from rmv_cmip_analysis import select_time
+from rmv_cmip_analysis import time_average
+from rmv_cmip_analysis import annual_average
+from rmv_cmip_analysis import numpy_to_cube
+from rmv_cmip_analysis import regrid_model
+from rmv_cmip_analysis import area_average
+from rmv_cmip_analysis import global_total
+from rmv_cmip_analysis import global_total_percentage
 
 
 #%%
@@ -58,7 +58,7 @@ observational_rh_mask = np.load('saved_variables/observational_rh_mask.npy')
 observational_rh = np.ma.masked_array(observational_rh_data, mask=observational_rh_mask)
 
 # loading observational land fraction
-landfraction_obs = combine_netCDF_observations('/home/links/rmv203/obs_datasets/luc4c_landmask.nc', 'mask')
+landfraction_obs = combine_netCDF_variable('/home/links/rmv203/obs_datasets/luc4c_landmask.nc', 'mask')
 
 
 #%%
@@ -123,7 +123,7 @@ for temp_option in range(0, temperature_change_options_length):
             # finding spatial profile for future temperature
 
             # time averaged, area averaged historical/present day temperature
-            tas_preindustrial_cube = combine_netCDF_time_overlap('/home/rmv203/cmip6_data/tas_Amon_'+model+'_historical*', model)
+            tas_preindustrial_cube = combine_netCDF_cmip6('/home/rmv203/cmip6_data/tas_Amon_'+model+'_historical*', model)
             tas_preindustrial_cube = open_netCDF(tas_preindustrial_cube)        
             tas_preindustrial_cube = select_time(tas_preindustrial_cube, 1995, 2005)
             tas_preindustrial_cube = time_average(tas_preindustrial_cube)
@@ -131,7 +131,7 @@ for temp_option in range(0, temperature_change_options_length):
             tas_preindustrial_data = tas_preindustrial_cube.data # time averaged, area averaged historical temperature
     
             # cube to find future temperature change
-            tas_cube = combine_netCDF_time_overlap('/home/rmv203/cmip6_historical_'+ssp+'/tas_Amon_'+model+'_*', model)
+            tas_cube = combine_netCDF_cmip6('/home/rmv203/cmip6_historical_'+ssp+'/tas_Amon_'+model+'_*', model)
             tas_cube = open_netCDF(tas_cube)
             tas_test_cube = annual_average(tas_cube)
             # defining the time variable for years
@@ -224,7 +224,7 @@ for temp_option in range(0, temperature_change_options_length):
             # global totals
 
             # model land fraction
-            landfraction = combine_netCDF('/home/rmv203/cmip6_data/sftlf_fx_'+model+'_historical*', model)
+            landfraction = combine_netCDF_model('/home/rmv203/cmip6_data/sftlf_fx_'+model+'_historical*', model)
             
             # Masking invalid values
             estimated_delta_Cs = np.ma.masked_invalid(estimated_delta_Cs)
